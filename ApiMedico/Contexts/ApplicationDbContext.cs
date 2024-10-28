@@ -7,5 +7,6 @@ namespace ApiMedico.Contexts
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<Especialidades> Especialidades { get; set; }
+        public DbSet<ListadoMedico> ListadoMedicos { get; set; }
     }
 }
