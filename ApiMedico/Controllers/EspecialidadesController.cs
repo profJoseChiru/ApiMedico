@@ -30,5 +30,23 @@ namespace ApiMedico.Controllers
             }
             return Ok(especialidad);
         }
+        [HttpPost]
+        public async Task<ActionResult<Especialidades>> CrearEspecialidades(Especialidades especialidades)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                applicationDbContext.Especialidades.Add(especialidades);
+                await applicationDbContext.SaveChangesAsync();
+                return CreatedAtAction(nameof(GetEspecialidades), new { id = especialidades.id }, especialidades);
+            }
+            catch (DbUpdateException)
+            {
+                return StatusCode(500, "Ocurrió un error al crear la Especialidad Médica");
+            }
+        }
     }
 }
